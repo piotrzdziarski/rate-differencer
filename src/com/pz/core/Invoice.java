@@ -6,14 +6,14 @@ import java.math.RoundingMode;
 import java.util.Calendar;
 import pl.allegro.finance.tradukisto.MoneyConverters;
 
-public class InvoiceSaver extends AccountingDocumentSaver {
+public class Invoice extends Document {
     private String moneyAmount;
     private String rate;
     private String rateName;
     private String rateDate;
     private String PLN_value_with_groszy;
 	
-    public InvoiceSaver(
+    public Invoice(
             CSV_Manager csv_manager, 
             int year, int month, int day, int invoiceNumber, String moneyAmount
     ) throws IOException {

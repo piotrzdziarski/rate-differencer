@@ -24,6 +24,9 @@ abstract class Form extends JPanel {
     private final DateFormat MONTH = new SimpleDateFormat("MM");
     private final DateFormat YEAR = new SimpleDateFormat("yyyy");
     protected JPanel formInnerPanel;
+    protected JTextField year;
+    protected JTextField month;
+    protected JTextField day;
     
     public Form (String label, String btnLabel) {
         super(new BorderLayout());
@@ -61,17 +64,17 @@ abstract class Form extends JPanel {
 
         JPanel datePanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
         datePanelWrapper.add(datePanel, BorderLayout.CENTER);
-        JTextField day = new JTextField(getDatePart(DAY));
+        day = new JTextField(getDatePart(DAY));
         day.setFont(INPUT_FONT);
         day.setMargin(new Insets(5, 7, 5, 5));
         day.setColumns(2);
         datePanel.add(day);
-        JTextField month = new JTextField(getDatePart(MONTH));
+        month = new JTextField(getDatePart(MONTH));
         month.setFont(INPUT_FONT);
         month.setMargin(new Insets(5, 7, 5, 5));
         month.setColumns(2);
         datePanel.add(month);
-        JTextField year = new JTextField(getDatePart(YEAR));
+        year = new JTextField(getDatePart(YEAR));
         year.setFont(INPUT_FONT);
         year.setMargin(new Insets(5, 9, 5, 7));
         datePanel.add(year);

@@ -21,7 +21,7 @@ public class Invoices extends JPanel {
         super(new BorderLayout());
         
         this.csv_manager = csv_manager;
-        this.setBorder(BorderFactory.createEmptyBorder(25, 0, 25, 0));
+        this.setBorder(BorderFactory.createEmptyBorder(20, 0, 25, 0));
         
         JPanel labelsWrapper = new JPanel();
         labelsWrapper.setLayout(new BoxLayout(labelsWrapper, BoxLayout.Y_AXIS));

@@ -8,7 +8,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-abstract public class AccountingDocumentSaver {
+abstract public class Document {
     protected CSV_Manager csv_manager;
     protected int year;
     protected int month;
@@ -20,7 +20,7 @@ abstract public class AccountingDocumentSaver {
     protected Calendar cal;
     protected DateFormat df;
 	
-    public AccountingDocumentSaver(
+    public Document(
             CSV_Manager csv_manager, 
             int year, int month, int day, int number,
             String inFileName, String outFileName

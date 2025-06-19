@@ -20,13 +20,13 @@ import javax.swing.JTextField;
 
 public class AccountantWindow extends JFrame {  
     public AccountantWindow() {
+        CSV_Manager csv_manager = new CSV_Manager();
+        
         setSize(800, 475);       
         setTitle("Rozliczacz różnic kursowych");
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
-        
-        CSV_Manager csv_manager = new CSV_Manager();
                 
         add(new Invoices(csv_manager), BorderLayout.NORTH);
         

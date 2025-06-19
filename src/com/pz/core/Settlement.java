@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import pl.allegro.finance.tradukisto.MoneyConverters;
 
-public class SettlementSaver extends AccountingDocumentSaver {
+public class SettlementSaver extends Document {
     private String payoutID;
     private String payoutRatio;
     private BigDecimal settledAmountDecimal;

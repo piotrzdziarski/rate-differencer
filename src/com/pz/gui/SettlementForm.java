@@ -1,5 +1,6 @@
 package com.pz.gui;
 
+import com.pz.core.Invoice;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Insets;
@@ -58,5 +59,12 @@ public class SettlementForm extends Form {
         JButton btn = new JButton("Rozlicz");
         btn.setFont(BTN_FONT);
         btnWrapper.add(btn);
+        /*btn.addActionListener(e -> {
+            Invoice invoice = new Invoice(
+                    Integer.parseInt(year.getText()),
+                    Integer.parseInt(month.getText()),
+                    Integer.parseInt(day.getText()),
+            );
+        });*/
     }
 }
