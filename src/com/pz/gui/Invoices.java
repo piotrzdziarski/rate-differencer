@@ -16,6 +16,8 @@ public class Invoices extends JPanel {
     private final Font LABEL_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 16);
     private final Font FIELD_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 14);
     private CSV_Manager csv_manager;
+    private JPanel invoicesList;
+    private JPanel emptyLabelWrapper;
     
     public Invoices(CSV_Manager csv_manager) {
         super(new BorderLayout());
@@ -35,35 +37,42 @@ public class Invoices extends JPanel {
         labels.add(getLabel("Kurs"));
         labels.add(getLabel("Wartość (PLN)"));
         
-        /*ArrayList<String[]> invoices = csv_manager.getInvoices();
-        JPanel invoicesList = new JPanel(new FlowLayout());
-        add(invoicesList);
-        //invoicesList.setLayout(new BoxLayout(invoicesList, BoxLayout.Y_AXIS));
-        for (String[] invoice : invoices) {
-            JPanel invoiceElement = new JPanel(new FlowLayout(FlowLayout.CENTER, 25, 5));
-            invoicesList.add(invoiceElement);
-            for (int i = 0; i < invoice.length; i++) {
-                JLabel field = new JLabel(invoice[i]);
-                field.setFont(FIELD_FONT);
-                invoiceElement.add(field);
-            }
-        }*/
         ArrayList<String[]> invoices = csv_manager.getInvoices();
-        JPanel invoicesList = new JPanel();
+        invoices.removeAll(invoices);
+        invoicesList = new JPanel();
         add(invoicesList);
         invoicesList.setLayout(new BoxLayout(invoicesList, BoxLayout.Y_AXIS));
-        for (String[] invoice : invoices) {
-            JPanel invoiceElement = new JPanel(new GridLayout(1, invoice.length));
-            invoiceElement.setMaximumSize(new Dimension(800, 50));
-            invoicesList.add(invoiceElement);
-            for (int i = 0; i < invoice.length; i++) {
-                JLabel field = new JLabel(invoice[i]);
-                field.setFont(FIELD_FONT);
-                JPanel invoiceElementInner = new JPanel(new FlowLayout());
-                invoiceElement.add(invoiceElementInner);
-                invoiceElementInner.add(field);
-            }
+        
+        emptyLabelWrapper = new JPanel(new FlowLayout());
+        JLabel emptyLabel = new JLabel("Lista faktur jest pusta.");
+        emptyLabel.setFont(FIELD_FONT);
+        emptyLabel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+        emptyLabelWrapper.add(emptyLabel);
+        invoicesList.add(emptyLabelWrapper);
+        emptyLabelWrapper.setVisible(invoices.isEmpty());
+        
+        for (String[] invoice : invoices)
+            addInvoice(invoice);
+    }
+    
+    public void addInvoice(String[] invoice) {
+        emptyLabelWrapper.setVisible(false);
+        JPanel invoiceElement = new JPanel(new GridLayout(1, invoice.length));
+        invoiceElement.setMaximumSize(new Dimension(800, 50));
+        invoicesList.add(invoiceElement);
+        for (int i = 0; i < invoice.length; i++) {
+            JLabel field = new JLabel(invoice[i]);
+            field.setFont(FIELD_FONT);
+            JPanel invoiceElementInner = new JPanel(new FlowLayout());
+            invoiceElement.add(invoiceElementInner);
+            invoiceElementInner.add(field);
         }
+        invoicesList.revalidate();
+    }
+    
+    public void removeInvoices() {
+        invoicesList.removeAll();
+        emptyLabelWrapper.setVisible(true);
     }
     
     private JPanel getLabel(String label) {

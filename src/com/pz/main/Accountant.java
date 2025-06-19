@@ -2,7 +2,7 @@ package com.pz.main;
 
 import com.pz.core.Invoice;
 import com.pz.core.CSV_Manager;
-import com.pz.core.SettlementSaver;
+import com.pz.core.Settlement;
 import com.pz.gui.AccountantWindow;
 import java.io.IOException;
 import java.math.BigDecimal;

@@ -24,6 +24,18 @@ public class Invoice extends Document {
         );
 	this.moneyAmount = moneyAmount;
     }
+    
+    public String getRate() {
+        return rate;
+    }
+    
+    public String getRateName() {
+        return rateName;
+    }
+    
+    public String get_PLN_value() {
+        return PLN_value_with_groszy;
+    }
 
     @Override
     public void save() throws IOException {        
@@ -39,13 +51,7 @@ public class Invoice extends Document {
                                     .setScale(2, RoundingMode.HALF_UP)
                                     .toString();
         
-        super.save();
-        
-        csv_manager.addInvoice(
-                accountingDocumentNumber, month, year, 
-                rate, rateName, PLN_value_with_groszy
-        );
-        
+        super.save();        
     }
     
     @Override
@@ -73,7 +79,6 @@ public class Invoice extends Document {
                 sb.append(moneyAmount);
                 break;
             case 10:
-                System.out.println(moneyAmount);
                 sb.append(
                         MoneyConverters.POLISH_BANKING_MONEY_VALUE.asWords(
                                 new BigDecimal(moneyAmount), "USD"

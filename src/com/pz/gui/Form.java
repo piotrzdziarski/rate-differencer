@@ -1,5 +1,6 @@
 package com.pz.gui;
 
+import com.pz.core.CSV_Manager;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -17,6 +18,9 @@ abstract class Form extends JPanel {
     protected final Font INPUT_FONT = new Font(Font.MONOSPACED, Font.PLAIN, 18);
     protected final Font FORM_LABEL_FONT = new Font(Font.SANS_SERIF, Font.BOLD, 14);
     protected final Font BTN_FONT = new Font(Font.SANS_SERIF, Font.PLAIN, 18);
+    protected Errorer errorer;
+    protected CSV_Manager csv_manager;
+    protected Invoices invoices;
     protected String label;
     protected String btnLabel;
     private Calendar cal;
@@ -28,8 +32,14 @@ abstract class Form extends JPanel {
     protected JTextField month;
     protected JTextField day;
     
-    public Form (String label, String btnLabel) {
+    public Form (
+            Errorer errorer, CSV_Manager csv_manager, Invoices invoices, 
+            String label, String btnLabel
+    ) {
         super(new BorderLayout());
+        this.errorer = errorer;
+        this.csv_manager = csv_manager;
+        this.invoices = invoices;
         this.label = label;
         this.btnLabel = btnLabel;
         this.cal = Calendar.getInstance();

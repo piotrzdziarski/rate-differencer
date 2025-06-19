@@ -5,12 +5,12 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import pl.allegro.finance.tradukisto.MoneyConverters;
 
-public class SettlementSaver extends Document {
+public class Settlement extends Document {
     private String payoutID;
     private String payoutRatio;
     private BigDecimal settledAmountDecimal;
 	
-    public SettlementSaver(
+    public Settlement(
             CSV_Manager csv_manager, 
             int year, int month, int day, int settlementNumber,
             String payoutID, String payoutRatio
@@ -18,7 +18,7 @@ public class SettlementSaver extends Document {
         super(
                 csv_manager, 
                 year, month, day, settlementNumber,
-                "Settlement_template.txt", "2.txt"
+                "Settlement_templatee.txt", "2.txt"
         );
 	this.payoutID = payoutID;
         this.payoutRatio = payoutRatio;
@@ -84,14 +84,14 @@ public class SettlementSaver extends Document {
               .append("; wartość USD: ")
               .append(invoice[1])
               .append(", wartość PLN: ")
-              .append(invoice[2])
+              .append(invoice[4])
               .append("; kurs podatkowy: ")
               .append(invoice[3])
               .append(" (")
-              .append(invoice[4])
+              .append(invoice[2])
               .append(").\n");
             USD_total += Double.parseDouble(invoice[1]);
-            settledAmount += Double.parseDouble(invoice[2]);
+            settledAmount += Double.parseDouble(invoice[4]);
             ordinal++;
         }
         settledAmount -= USD_total * Double.parseDouble(payoutRatio);
