@@ -1,5 +1,6 @@
 package com.pz.gui;
 
+import com.pz.core.CSV_Manager;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -19,20 +20,23 @@ import javax.swing.JTextField;
 
 public class AccountantWindow extends JFrame {  
     public AccountantWindow() {
-        setSize(500, 400);       
+        setSize(800, 475);       
         setTitle("Rozliczacz różnic kursowych");
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
         
+        CSV_Manager csv_manager = new CSV_Manager();
+                
+        add(new Invoices(csv_manager), BorderLayout.NORTH);
+        
         JPanel formsPanel = new JPanel();
-        BoxLayout bl = new BoxLayout(formsPanel, BoxLayout.X_AXIS);
-        formsPanel.setLayout(bl);
+        formsPanel.setLayout(new BoxLayout(formsPanel, BoxLayout.X_AXIS));
         
         add(formsPanel, BorderLayout.CENTER);
-        Form invoiceForm = new Form(formsPanel, "Dodaj fakturę:", "Dodaj");
-        invoiceForm.invoice();
-        Form settlementForm = new Form(formsPanel, "Rozlicz:", "Rozlicz");
-        settlementForm.settlement();
+        Form invoiceForm = new InvoiceForm("Dodaj fakturę:", "Dodaj");
+        formsPanel.add(invoiceForm);
+        Form settlementForm = new SettlementForm("Rozlicz faktury:", "Rozlicz");
+        formsPanel.add(settlementForm);
     }
 }
