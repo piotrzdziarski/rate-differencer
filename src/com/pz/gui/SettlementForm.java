@@ -72,8 +72,9 @@ public class SettlementForm extends Form {
         rate.setMargin(new Insets(5, 7, 5, 5));
         rateWrapper.add(rate);
         
-        JPanel btnWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 12));
+        JPanel btnWrapper = new JPanel(new FlowLayout());
         payoutRateButtonedWrapper.add(btnWrapper, BorderLayout.CENTER);
+        btnWrapper.setBorder(BorderFactory.createEmptyBorder(10, 0, 25, 0));
         btn = new JButton("Rozlicz");
         btn.setFont(BTN_FONT);
         btn.setEnabled(!csv_manager.getInvoices().isEmpty());

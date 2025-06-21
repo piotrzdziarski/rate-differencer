@@ -38,7 +38,6 @@ public class Invoices extends JPanel {
         labels.add(getLabel("Wartość (PLN)"));
         
         ArrayList<String[]> invoices = csv_manager.getInvoices();
-        invoices.removeAll(invoices);
         invoicesList = new JPanel();
         add(invoicesList);
         invoicesList.setLayout(new BoxLayout(invoicesList, BoxLayout.Y_AXIS));
@@ -46,10 +45,10 @@ public class Invoices extends JPanel {
         emptyLabelWrapper = new JPanel(new FlowLayout());
         JLabel emptyLabel = new JLabel("Lista faktur jest pusta.");
         emptyLabel.setFont(FIELD_FONT);
-        emptyLabel.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
+        emptyLabel.setBorder(BorderFactory.createEmptyBorder(5, 15, 0, 0));
         emptyLabelWrapper.add(emptyLabel);
-        invoicesList.add(emptyLabelWrapper);
-        emptyLabelWrapper.setVisible(invoices.isEmpty());
+        if(invoices.isEmpty())
+            invoicesList.add(emptyLabelWrapper);
         
         for (String[] invoice : invoices)
             addInvoice(invoice);
