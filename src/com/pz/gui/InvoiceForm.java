@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class InvoiceForm extends Form {
+    private JButton settlementBtn;
+    
     public InvoiceForm(
             Errorer errorer, CSV_Manager csv_manager, Invoices invoices, 
             String label, String btnLabel
@@ -81,9 +83,14 @@ public class InvoiceForm extends Form {
                         invoice.getRate(), invoice.getRateName()
                     )
                 );
+                settlementBtn.setEnabled(true);
             } catch (IOException ex) {
                 errorer.push("Nie udało się zapisać faktury.");
             }
         });
+    }
+    
+    public void setSettlementBtn(JButton btn) {
+        this.settlementBtn = btn;
     }
 }

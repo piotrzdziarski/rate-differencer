@@ -37,15 +37,16 @@ public class AccountantWindow extends JFrame {
         formsPanel.setLayout(new BoxLayout(formsPanel, BoxLayout.X_AXIS));
         
         add(formsPanel, BorderLayout.CENTER);
-        Form invoiceForm = new InvoiceForm(
+        InvoiceForm invoiceForm = new InvoiceForm(
                 errorer, csv_manager, invoices, 
                 "Dodaj fakturę:", "Dodaj"
         );
         formsPanel.add(invoiceForm);
-        Form settlementForm = new SettlementForm(
+        SettlementForm settlementForm = new SettlementForm(
                 errorer, csv_manager, invoices, 
                 "Rozlicz faktury:", "Rozlicz"
         );
         formsPanel.add(settlementForm);
+        invoiceForm.setSettlementBtn(settlementForm.getBtn());
     }
 }

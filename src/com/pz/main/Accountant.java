@@ -4,6 +4,7 @@ import com.pz.core.Invoice;
 import com.pz.core.CSV_Manager;
 import com.pz.core.Settlement;
 import com.pz.gui.AccountantWindow;
+import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import javax.swing.SwingUtilities;
@@ -14,7 +15,6 @@ public class Accountant {
         SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run() {
-                
                 //try {
                     /*CSV_Manager csv_manager = new CSV_Manager();
                     SettlementSaver ss = new SettlementSaver(

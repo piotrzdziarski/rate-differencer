@@ -1,6 +1,7 @@
 package com.pz.core;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -53,8 +54,27 @@ abstract public class Document {
         }
         br.close();
         
+        String path = "documents/" + year;
+        int new_number = 1;
+        File year_dir = new File(path);
+        if (!year_dir.isDirectory())
+            year_dir.mkdir();
+        path += "/" + month;
+        File month_dir = new File(path);
+        if (!month_dir.isDirectory()) {
+            month_dir.mkdir();
+        } else {
+            for (String document : month_dir.list()) {
+                try {
+                    int document_number = Integer.parseInt(document.split(".txt")[0]);
+                    if (document_number >= new_number)
+                        new_number = document_number + 1;
+                } catch (NumberFormatException ex) {}
+            }
+        }
+        
         FileWriter fw;
-        fw = new FileWriter(outFileName);
+        fw = new FileWriter(path +  "/" + new_number + ".txt");
         fw.write(sb.toString());
         fw.close();        
     }

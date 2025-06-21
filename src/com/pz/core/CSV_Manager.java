@@ -54,6 +54,7 @@ public class CSV_Manager {
     }
     
     public void removeInvoices() throws IOException {
+        invoices.clear();
         FileWriter fw = new FileWriter(FILE);
         fw.close();
     }

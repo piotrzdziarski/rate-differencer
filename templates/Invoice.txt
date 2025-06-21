@@ -1,0 +1,40 @@
+Miejscowość (location): Łowicz
+Data (date): $
+
+Faktura nr (invoice no.) FR $/$/$
+
+Data sprzedaży (date of sale): $
+Sposób zapłaty (method of payment): przelew (bank transfer)
+Termin płatności (due date): $
+
+Sprzedawca (Seller):
+Banth Apps Piotr Zdziarski
+os. Starzyńskiego 8/54
+99-400 Łowicz
+Polska (Poland)
+NIP (TIN): 8341892133
+
+Nabywca (Buyer):
+Bright Market, LLC
+marka: FastSpring
+801 Garden St.
+CA 93101 Santa Barbara
+Stany Zjednoczone (United States)
+
+Pozycje faktury (invoice items)
+Lp (No.); Nazwa usługi (name of service); Ilość (quantity); Cena (price);
+Wartość (amount)
+1; Opłata licencyjna z tytuły sprzedaży wtyczki Fullscreen Lightbox w
+FastSpring (the license fee due to the selling of the Fullscreen Lightbox
+plug-in in FastSpring); 1 szt. (pcs.); $ USD; $ USD
+
+Podsumowanie (summary)
+Razem (total): $ USD
+Zapłacono (amount paid): 0 USD
+Pozostało do zapłaty (left to pay): $ USD
+Słownie (in words): $ ($)
+Uwagi (remarks):
+Referencyjny kurs wymiany NBP USD/PLN numer (NBP's USD/PLN reference exchange
+rate number) $ z dnia (as at) $: $. Wartość w
+przeliczeniu na złotówki (PLN equivalent): $.
+Odwrotne obciążenie (reverse charge).

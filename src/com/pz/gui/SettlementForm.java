@@ -12,7 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class SettlementForm extends Form {    
+public class SettlementForm extends Form {
+    private JButton btn;
+    
     public SettlementForm(
             Errorer errorer, CSV_Manager csv_manager, Invoices invoices, 
             String label, String btnLabel
@@ -72,8 +74,9 @@ public class SettlementForm extends Form {
         
         JPanel btnWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 12));
         payoutRateButtonedWrapper.add(btnWrapper, BorderLayout.CENTER);
-        JButton btn = new JButton("Rozlicz");
+        btn = new JButton("Rozlicz");
         btn.setFont(BTN_FONT);
+        btn.setEnabled(!csv_manager.getInvoices().isEmpty());
         btnWrapper.add(btn);
         btn.addActionListener(e -> {
             errorer.pop();
@@ -90,9 +93,14 @@ public class SettlementForm extends Form {
                 settlement.save();
                 invoices.removeInvoices();
                 csv_manager.removeInvoices();
+                btn.setEnabled(false);
             } catch (IOException ex) {
                 errorer.push("Nie udało się rozliczyć faktur.");
             }
         });
+    }
+    
+    public JButton getBtn() {
+        return btn;
     }
 }

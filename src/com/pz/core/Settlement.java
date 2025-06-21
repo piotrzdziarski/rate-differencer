@@ -18,7 +18,7 @@ public class Settlement extends Document {
         super(
                 csv_manager, 
                 year, month, day, settlementNumber,
-                "Settlement_templatee.txt", "2.txt"
+                "templates/Settlement.txt", "2.txt"
         );
 	this.payoutID = payoutID;
         this.payoutRatio = payoutRatio;

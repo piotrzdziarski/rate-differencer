@@ -56,7 +56,7 @@ public class Invoices extends JPanel {
     }
     
     public void addInvoice(String[] invoice) {
-        emptyLabelWrapper.setVisible(false);
+        invoicesList.remove(emptyLabelWrapper);
         JPanel invoiceElement = new JPanel(new GridLayout(1, invoice.length));
         invoiceElement.setMaximumSize(new Dimension(800, 50));
         invoicesList.add(invoiceElement);
@@ -72,7 +72,8 @@ public class Invoices extends JPanel {
     
     public void removeInvoices() {
         invoicesList.removeAll();
-        emptyLabelWrapper.setVisible(true);
+        invoicesList.add(emptyLabelWrapper);
+        invoicesList.revalidate();
     }
     
     private JPanel getLabel(String label) {

@@ -20,7 +20,7 @@ public class Invoice extends Document {
         super(
                 csv_manager, 
                 year, month, day, invoiceNumber,
-                "Invoice_template.txt", "1.txt"
+                "templates/Invoice.txt", "1.txt"
         );
 	this.moneyAmount = moneyAmount;
     }
