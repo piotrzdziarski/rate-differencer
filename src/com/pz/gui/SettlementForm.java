@@ -49,7 +49,7 @@ public class SettlementForm extends Form {
         number.setFont(INPUT_FONT);
         number.setMargin(new Insets(5, 7, 5, 5));
         number_ID_panel.add(number);
-        JTextField ID = new JTextField("14-");
+        JTextField ID = new JTextField("1-abcd");
         ID.setFont(INPUT_FONT);
         ID.setMargin(new Insets(5, 7, 5, 5));
         ID.setColumns(10);
@@ -65,7 +65,7 @@ public class SettlementForm extends Form {
         payoutRateWrapper.add(payoutRateButtonedWrapper, BorderLayout.CENTER);
         JPanel rateWrapper = new JPanel(new FlowLayout());
         payoutRateButtonedWrapper.add(rateWrapper, BorderLayout.NORTH);
-        JTextField rate = new JTextField("3.120312");
+        JTextField rate = new JTextField("3.00");
         rate.setColumns(14);
         rate.setFont(INPUT_FONT);
         rate.setMargin(new Insets(5, 7, 5, 5));
