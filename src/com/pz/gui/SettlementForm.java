@@ -1,11 +1,10 @@
 package com.pz.gui;
 
 import com.pz.core.CSV_Manager;
-import com.pz.core.Settlement;
+import com.pz.core.SubmitSettlement;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Insets;
-import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -80,23 +79,14 @@ public class SettlementForm extends Form {
         btn.setEnabled(!csv_manager.getInvoices().isEmpty());
         btnWrapper.add(btn);
         btn.addActionListener(e -> {
-            errorer.pop();
             try {
-                Settlement settlement = new Settlement(
-                        csv_manager,
-                        Integer.parseInt(year.getText()),
-                        Integer.parseInt(month.getText()),
-                        Integer.parseInt(day.getText()),
-                        Integer.parseInt(number.getText()),
-                        ID.getText(),
-                        rate.getText()
-                );
-                settlement.save();
-                invoices.removeInvoices();
-                csv_manager.removeInvoices();
-                btn.setEnabled(false);
-            } catch (IOException ex) {
-                errorer.push("Nie udało się rozliczyć faktur.");
+                new SubmitSettlement(
+                    errorer, csv_manager, invoices,
+                    year.getText(), month.getText(), day.getText(), number.getText(),
+                    btn, ID.getText(), rate.getText()
+                ).start();
+            } catch (NumberFormatException ex) {
+                errorer.show("Nieprawidłowy format danych.");
             }
         });
     }

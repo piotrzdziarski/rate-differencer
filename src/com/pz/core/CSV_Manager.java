@@ -1,5 +1,6 @@
 package com.pz.core;
 
+import com.pz.gui.Errorer;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,10 +13,15 @@ public class CSV_Manager {
     private File file;
     private Scanner sc;
     
-    public CSV_Manager() throws IOException {
+    public CSV_Manager(Errorer errorer) {
         invoices = new ArrayList<>();
         file = new File(FILE);
-        sc = new Scanner(file);    
+        try {
+            sc = new Scanner(file);
+        } catch (IOException ex) {
+            errorer.show("Nie udało się odczytać pliku \"invoices.csv\".");
+            return;
+        }
         
         while (sc.hasNextLine()) {
             invoices.add(sc.nextLine().split(","));

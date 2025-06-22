@@ -25,7 +25,7 @@ abstract public class Document {
             CSV_Manager csv_manager, 
             int year, int month, int day, int number,
             String inFileName, String outFileName
-    ) throws IOException {
+    ) {
         this.csv_manager = csv_manager;
 	this.year = year;
 	this.month = month;
@@ -41,8 +41,13 @@ abstract public class Document {
         df = new SimpleDateFormat("yyyy-MM-dd");
     }
 
-    protected void save() throws IOException { 
-        BufferedReader br = new BufferedReader(new FileReader(inFileName));
+    protected void save() throws IOException {
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(inFileName));
+        } catch (IOException ex) {
+            throw new MissingFileException("Brak pliku \"" + inFileName + "\"");
+        }
         int templateVariableNumber = 0;
         int c;
         while ((c = br.read()) != -1) {
@@ -54,13 +59,17 @@ abstract public class Document {
         }
         br.close();
         
-        String path = "documents/" + year;
-        int new_number = 1;
+        String path = "documents/";
+        File documents_dir = new File(path);
+        if (!documents_dir.isDirectory())
+            throw new MissingFileException("Brak folderu \"documents\"");
+        path += year;
         File year_dir = new File(path);
         if (!year_dir.isDirectory())
             year_dir.mkdir();
         path += "/" + month;
         File month_dir = new File(path);
+        int new_number = 1;
         if (!month_dir.isDirectory()) {
             month_dir.mkdir();
         } else {

@@ -12,11 +12,12 @@ public class Invoice extends Document {
     private String rateName;
     private String rateDate;
     private String PLN_value_with_groszy;
+    private BigDecimal USD_value_with_cents;
 	
     public Invoice(
             CSV_Manager csv_manager, 
             int year, int month, int day, int invoiceNumber, String moneyAmount
-    ) throws IOException {
+    ) {
         super(
                 csv_manager, 
                 year, month, day, invoiceNumber,
@@ -36,13 +37,20 @@ public class Invoice extends Document {
     public String get_PLN_value() {
         return PLN_value_with_groszy;
     }
+    
+    public String get_USD_value() {
+        return USD_value_with_cents.toString();
+    }
 
     @Override
-    public void save() throws IOException {        
+    public void save() throws IOException {
         ExchangeRater exchangeRater = new ExchangeRater(year, month, day);
         rate = exchangeRater.getRate();
         rateName = exchangeRater.getRateName();
         rateDate = exchangeRater.getDate();
+        
+        USD_value_with_cents = new BigDecimal(moneyAmount)
+                .setScale(2, RoundingMode.HALF_UP);
         
         double PLN_equivalent = 
                 Double.parseDouble(rate) 
@@ -51,7 +59,7 @@ public class Invoice extends Document {
                                     .setScale(2, RoundingMode.HALF_UP)
                                     .toString();
         
-        super.save();        
+        super.save();      
     }
     
     @Override
@@ -76,19 +84,19 @@ public class Invoice extends Document {
                 sb.append(df.format(cal.getTime()));
                 break;
             case 6: case 7: case 8: case 9:
-                sb.append(moneyAmount);
+                sb.append(USD_value_with_cents.toString());
                 break;
             case 10:
                 sb.append(
                         MoneyConverters.POLISH_BANKING_MONEY_VALUE.asWords(
-                                new BigDecimal(moneyAmount), "USD"
+                                USD_value_with_cents, "USD"
                         )
                 );
                 break;
             case 11:
                 sb.append(
                         MoneyConverters.AMERICAN_ENGLISH_BANKING_MONEY_VALUE.asWords(
-                                new BigDecimal(moneyAmount)
+                                USD_value_with_cents
                         )
                 );
                 break;

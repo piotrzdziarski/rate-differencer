@@ -2,28 +2,16 @@ package com.pz.gui;
 
 import com.pz.core.CSV_Manager;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.ContainerEvent;
-import java.awt.event.ContainerListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
-public class AccountantWindow extends JFrame {      
-    public AccountantWindow() {       
-        setSize(825, 475);       
+public class Window extends JFrame {      
+    public Window() {
+        setSize(825, 500);       
         setTitle("Rozliczacz różnic kursowych");
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -31,26 +19,19 @@ public class AccountantWindow extends JFrame {
         JPanel container = new JPanel(new BorderLayout());
         JScrollPane scroll = new JScrollPane(container);
         JScrollBar verticalScrollBar = scroll.getVerticalScrollBar();
-        verticalScrollBar.addAdjustmentListener( e-> {
+        verticalScrollBar.addAdjustmentListener(e -> {
             int borderRight = verticalScrollBar.isShowing() 
                     ? 0 
-                    : verticalScrollBar.getSize().width;
+                    : verticalScrollBar.getMinimumSize().width;
             container.setBorder(
-                    BorderFactory.createEmptyBorder(0, 0, 0, borderRight + 15)
+                    BorderFactory.createEmptyBorder(0, 0, 0, borderRight)
             );
         });
         add(scroll);
         
-        Errorer errorer = new Errorer();
-        container.add(errorer, BorderLayout.SOUTH);
+        Errorer errorer = new Errorer(container);
         
-        CSV_Manager csv_manager;
-        try {
-            csv_manager = new CSV_Manager();
-        } catch (IOException ex) {
-            errorer.push("Nie udało się odczytać pliku \"invoices.csv\".");
-            return;
-        }
+        CSV_Manager csv_manager = new CSV_Manager(errorer);
 
         Invoices invoices = new Invoices(csv_manager);
         container.add(invoices, BorderLayout.NORTH);

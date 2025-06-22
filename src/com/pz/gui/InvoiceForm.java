@@ -1,11 +1,10 @@
 package com.pz.gui;
 
 import com.pz.core.CSV_Manager;
-import com.pz.core.Invoice;
+import com.pz.core.SubmitInvoice;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Insets;
-import java.io.IOException;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -59,33 +58,14 @@ public class InvoiceForm extends Form {
         btnWrapper.add(btn);
         
         btn.addActionListener(e -> {
-            errorer.pop();
-            int year_int = Integer.parseInt(year.getText());
-            int month_int = Integer.parseInt(month.getText());
-            int day_int = Integer.parseInt(day.getText());
-            int num_int = Integer.parseInt(number.getText());
-            String USD_value = value.getText();
-            
             try {
-                Invoice invoice = new Invoice(
-                        csv_manager,
-                        year_int,
-                        month_int,
-                        day_int,
-                        num_int,
-                        USD_value
-                );
-                invoice.save();
-                invoices.addInvoice(
-                    csv_manager.addInvoice(
-                        num_int, month_int, year_int, 
-                        USD_value, invoice.get_PLN_value(), 
-                        invoice.getRate(), invoice.getRateName()
-                    )
-                );
-                settlementBtn.setEnabled(true);
-            } catch (IOException ex) {
-                errorer.push("Nie udało się zapisać faktury.");
+                new SubmitInvoice(
+                    errorer, csv_manager, invoices,
+                    year.getText(), month.getText(), day.getText(), number.getText(),
+                    settlementBtn, value.getText()
+                ).start();
+            } catch (NumberFormatException ex) {
+                errorer.show("Nieprawidłowy format danych.");
             }
         });
     }

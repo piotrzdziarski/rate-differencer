@@ -14,7 +14,7 @@ public class Settlement extends Document {
             CSV_Manager csv_manager, 
             int year, int month, int day, int settlementNumber,
             String payoutID, String payoutRatio
-    ) throws IOException {
+    ) {
         super(
                 csv_manager, 
                 year, month, day, settlementNumber,
